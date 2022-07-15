@@ -6,6 +6,7 @@ Grafter for IPR
 ```
 git clone 
 ```
+After clone to local, please import to Eclipse with `Maven > Existing Maven Projects`
 ## Dataset Download Address
 Please download the [dataset](http://web.cs.ucla.edu/~tianyi.zhang/grafter/grafter-dataset.zip)
 

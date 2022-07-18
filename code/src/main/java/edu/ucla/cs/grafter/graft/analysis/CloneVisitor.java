@@ -48,6 +48,9 @@ import edu.ucla.cs.grafter.graft.model.Label;
 import edu.ucla.cs.grafter.graft.model.Method;
 import edu.ucla.cs.grafter.graft.model.Token;
 
+import static edu.ucla.cs.grafter.Constants.*;
+
+
 /**
  * CloneVisitor collects a list of identifiers, including variables, fields and
  * parameters that
@@ -957,8 +960,8 @@ public class CloneVisitor extends ASTVisitor {
 	}
 
 	public static void main(String[] args) throws IOException {
-		// TODO: change to own grafter-dataset directory
-		String filePath = "/Users/jay/grafter-dataset/ant/src/main/org/apache/tools/ant/types/PatternSet.java";
+		// Whole path is /Users/jay/grafter-dataset/ant/src/main/org/apache/tools/ant/types/PatternSet.java
+		String filePath = GRAFTER_DATASET_PATH + "ant/src/main/org/apache/tools/ant/types/PatternSet.java";
 		int lineNumber = 344;
 		parseSnipCode(filePath, lineNumber);
 	}

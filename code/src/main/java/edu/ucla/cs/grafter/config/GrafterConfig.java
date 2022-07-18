@@ -6,9 +6,10 @@ import javax.swing.JOptionPane;
 
 import edu.ucla.cs.grafter.file.FileUtils;
 
+import static edu.ucla.cs.grafter.Constants.*;
+
 public class GrafterConfig {
-	// TODO: change to own Grafter Path
-	final static String path = "/Users/jay/Grafter/code/Grafter(Ant).config";
+	final static String path =  GRAFTER_CODE_PATH + "Grafter(Ant).config";
 	
 	public static String root_dir;
 	public static String src_dir;

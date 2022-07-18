@@ -21,9 +21,12 @@ import edu.ucla.cs.grafter.file.FileUtils;
 import edu.ucla.cs.grafter.graft.analysis.CloneCalibrator;
 import edu.ucla.cs.grafter.graft.analysis.CloneVisitor;
 
+import static edu.ucla.cs.grafter.Constants.*;
+
+
 public class CloneInstrument {
-	// TODO: change to own Grafter Path
-	static final String template = "/Users/jay/Grafter/code/src/main/resources/template/TestTracker.template";
+	// Whole path is /Users/jay/Grafter/code/src/main/resources/template/TestTracker.template
+	static final String template = GRAFTER_CODE_PATH + "src/main/resources/template/TestTracker.template";
 	int id;
 	String path;
 	int start;
@@ -164,8 +167,7 @@ public class CloneInstrument {
 
 		// we should run this new clone file
 		ProcessBuilder processBuilder = new ProcessBuilder();
-		// TODO: change to the Grafter path
-		processBuilder.command("/Users/jay/Grafter/code/myscript.sh", "CloneInstrumentTest");
+		processBuilder.command(GRAFTER_CODE_PATH + "myscript.sh", "CloneInstrumentTest");
 
 		Process process;
 		try {
@@ -363,9 +365,8 @@ public class CloneInstrument {
 
 	// used for manual testing
 	public static void main(String[] args) {
-		// TODO: change to own grafter-dataset directory
 		CloneInstrument.showDiff(
-				"/Users/jay/grafter-dataset/ant/src/main/org/apache/tools/ant/types/PatternSet.java",
+				GRAFTER_DATASET_PATH + "ant/src/main/org/apache/tools/ant/types/PatternSet.java",
 				343, "StringTokenizer tok = new StringTokenizer(includes, \", \", false);");
 	}
 }

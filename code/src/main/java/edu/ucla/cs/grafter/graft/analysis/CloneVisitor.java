@@ -937,11 +937,20 @@ public class CloneVisitor extends ASTVisitor {
 
 	public static ArrayList<String> parseSnipCode(String file, int lineNumber) throws IOException {
 		CloneParser cp = new CloneParser();
+		String classNames[] = file.split("/");
+		int size_of_classNames = classNames.length;
+		String clazz = classNames[size_of_classNames - 1];
+		if (clazz.contains(".java")) {
+			clazz = clazz.substring(0, clazz.indexOf("."));
+		} else {
+			System.out.printf("Error! File path error");
+			return null;
+		}
 		String strFile = cp.readFileToString(file);
 		CloneVisitor dummy = new CloneVisitor();
 		dummy.get_x_y(lineNumber, strFile);
 		CompilationUnit cu = cp.parse(file);
-		Clone clone = new Clone(dummy.get_x(), dummy.get_y(), null, "PatternSet");
+		Clone clone = new Clone(dummy.get_x(), dummy.get_y(), null, clazz);
 		CloneVisitor cv = new CloneVisitor(clone, cu, file);
 		cu.accept(cv);
 		ArrayList<String> vars = new ArrayList<>();

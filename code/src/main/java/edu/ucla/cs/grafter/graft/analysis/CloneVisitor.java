@@ -935,8 +935,7 @@ public class CloneVisitor extends ASTVisitor {
 		}
 	}
 
-	public static ArrayList<String> parseSnipCode(String file, int lineNumber) throws IOException {
-		CloneParser cp = new CloneParser();
+	private static String getClazzName(String file) {
 		String classNames[] = file.split("/");
 		int size_of_classNames = classNames.length;
 		String clazz = classNames[size_of_classNames - 1];
@@ -946,10 +945,17 @@ public class CloneVisitor extends ASTVisitor {
 			System.out.printf("Error! File path error");
 			return null;
 		}
+		return clazz;
+	}
+
+	public static ArrayList<String> parseSnipCode(String file, int lineNumber) throws IOException {
+		CloneParser cp = new CloneParser();
+
 		String strFile = cp.readFileToString(file);
 		CloneVisitor dummy = new CloneVisitor();
 		dummy.get_x_y(lineNumber, strFile);
 		CompilationUnit cu = cp.parse(file);
+		String clazz = getClazzName(file);
 		Clone clone = new Clone(dummy.get_x(), dummy.get_y(), null, clazz);
 		CloneVisitor cv = new CloneVisitor(clone, cu, file);
 		cu.accept(cv);

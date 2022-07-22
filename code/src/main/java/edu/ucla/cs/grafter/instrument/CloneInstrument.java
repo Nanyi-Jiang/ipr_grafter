@@ -47,7 +47,7 @@ public class CloneInstrument {
 		// CloneVisitor.parseSnipCode(filepath, linenumber);
 
 		// get variables needed from CloneVisitor.parseSnipCode
-		ArrayList<String> vars;
+		ArrayList<ArrayList<String>> vars;
 		try {
 			vars = CloneVisitor.parseSnipCode(filepath, linenumber);
 		} catch (IOException e) {
@@ -112,9 +112,14 @@ public class CloneInstrument {
 		}
 
 		// create the inserted lines
-		for (String each : vars) {
+		// vars[0] is used variable list; vars[1] is defined variable list
+		for (String each : vars.get(0)) {
 			addedBefore.add("System.out.println(\"before line " + linenumber + ", "
 					+ each + " is " + "\"+ " + "xtream.toXML(" + each + ")" + ");");
+			addedAfter.add("System.out.println(\"after line " + linenumber + ", "
+					+ each + " is " + "\"+ " + "xtream.toXML(" + each + ")" + ");");
+		}
+		for (String each : vars.get(1)) {
 			addedAfter.add("System.out.println(\"after line " + linenumber + ", "
 					+ each + " is " + "\"+ " + "xtream.toXML(" + each + ")" + ");");
 		}

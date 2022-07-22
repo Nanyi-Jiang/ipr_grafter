@@ -948,9 +948,8 @@ public class CloneVisitor extends ASTVisitor {
 		return clazz;
 	}
 
-	public static ArrayList<String> parseSnipCode(String file, int lineNumber) throws IOException {
+	public static ArrayList<ArrayList<String>> parseSnipCode(String file, int lineNumber) throws IOException {
 		CloneParser cp = new CloneParser();
-
 		String strFile = cp.readFileToString(file);
 		CloneVisitor dummy = new CloneVisitor();
 		dummy.get_x_y(lineNumber, strFile);
@@ -959,19 +958,24 @@ public class CloneVisitor extends ASTVisitor {
 		Clone clone = new Clone(dummy.get_x(), dummy.get_y(), null, clazz);
 		CloneVisitor cv = new CloneVisitor(clone, cu, file);
 		cu.accept(cv);
-		ArrayList<String> vars = new ArrayList<>();
+		ArrayList<String> used = new ArrayList<>();
+		ArrayList<String> defined = new ArrayList<>();
 		System.out.println("uses: ");
 		for (Token t : cv.uses) {
 			System.out.println(t.getLabel() + " - " + t.getType() + " " + t.getName());
-			vars.add(t.getName());
+			used.add(t.getName());
 		}
 
 		System.out.println("defined: ");
 		for (Token t : cv.defs) {
 			System.out.println(t.getLabel() + " - " + t.getType() + " " + t.getName());
-			vars.add(t.getName());
+			defined.add(t.getName());
 		}
-		return vars;
+
+		ArrayList<ArrayList<String>> ans = new ArrayList<>();
+		ans.add(used);
+		ans.add(defined);
+		return ans;
 	}
 
 	public static void main(String[] args) throws IOException {

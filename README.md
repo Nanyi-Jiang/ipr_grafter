@@ -18,4 +18,4 @@ To use the Grafter, please change the directory address refer to TODO mark in th
 > Some path are the path to [dataset](http://web.cs.ucla.edu/~tianyi.zhang/grafter/grafter-dataset.zip) and some path are the ones to ipr_grafter
 
 ## Run
-To run test demo, please go to the CloneInstrument.java and run the `main()`
+To run test demo, please first make sure the opened folder is /ipr_grafter/code and then go to the CloneInstrument.java and run the `main()`
